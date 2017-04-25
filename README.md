@@ -31,7 +31,7 @@ html2canvas(element, {
 });
 ```
 
-做个小李子：
+做个小例子代码如下，在线展示链接[demo](在线演示：[demo1](https://linwalker.github.io/render-html-to-pdf/demo1/html2canvas.html))
 
 ```
 <html>
@@ -71,8 +71,4 @@ html2canvas(element, {
         })
     </script>
   </body>
-</html>
-```
-
-
-
+</h
