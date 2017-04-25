@@ -1,0 +1,95 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>
+      html2canvas example
+    </title>
+    <style type="text/css">
+      html {
+        font: 10px/1 Verdana, sans-serif;
+        background-color: blue;
+      }
+      body {
+        margin: 1.5em;
+        padding: 0;
+        background-color: white;
+      }
+      ul {
+        margin: 0;
+        border: 0;
+        padding: 0;
+      }
+      li {
+        display: block; /* i.e., suppress marker */
+        color: black;
+        height: 4em;
+        width: 25%;
+        margin: 0;
+        float: left;
+        background-color: green;
+        text-align: center;
+        line-height: 4em;
+      }
+      
+      aside {
+        width: 20%;
+        float: left;
+        text-align: center;
+      }
+
+      aside a {
+        display: block;
+        height: 4em;
+        color: blue;
+      }
+
+      article {
+        padding: 2em 0;
+        width: 80%;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>one</li>
+          <li>two</li>
+          <li>three</li>
+          <li>four</li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <aside>
+        <h3>it is a title</h3>
+        <a href="">Stone Giant</a>
+        <a href="">link2</a>
+        <a href="">link3</a>
+        <a href="">link4</a>
+        <a href="">link5</a>
+        <a href="">link6</a>
+      </aside>
+      <article>
+        <img src="Stone.png">
+        <h2>Stone Giant</h2>
+        <p>
+          Coming to life as a chunk of stone, Tiny's origins are a mystery on which he continually speculates. He is a Stone Giant now, but what did he used to be? A splinter broken from a Golem's heel? A shard swept from a gargoyle-sculptor's workshop? A fragment of the Oracular Visage of Garthos? A deep curiosity drives him, and he travels the world tirelessly seeking his origins, his parentage, his people. As he roams, he gathers weight and size; the forces that weather lesser rocks, instead cause Tiny to grow and ever grow.
+        </p>
+        <p>
+          以一团石头的形式出现的生命体，小小不断思索他的起源，但这始终是个谜。现在的他是个石巨人，但过去是什么呢？从土傀儡的脚后跟掉落的碎片？从制造石像鬼的工房被打扫出来的碎屑？神圣预言石的表层之砂？受到强烈的好奇心驱使，他不知疲倦的环游世界，寻找着他的起源，他的出身，和他的种族。在旅途中，他变得越来越庞大，不过路上的风雨吹打掉了他身上的石头，所以他不停的吸收新的岩石，永远在长大。
+        </p>
+      </article>
+    </section>
+    <footer>write by linwalker @2017</footer>
+    <script type="text/javascript" src="html2canvas.js"></script>
+    <script type="text/javascript">
+        html2canvas(document.body, {
+          onrendered:function(canvas) {
+            document.body.appendChild(canvas)
+          }
+        })
+    </script>
+  </body>
+</html>
