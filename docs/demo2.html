@@ -72,7 +72,8 @@
         <a href="">link6</a>
       </aside>
       <article>
-        <img src="Stone.png">
+        <img src="./img/Stone.png">
+        <button id="renderPdf">生成PDF</button>
         <h2>Stone Giant</h2>
         <p>
           Coming to life as a chunk of stone, Tiny's origins are a mystery on which he continually speculates. He is a Stone Giant now, but what did he used to be? A splinter broken from a Golem's heel? A shard swept from a gargoyle-sculptor's workshop? A fragment of the Oracular Visage of Garthos? A deep curiosity drives him, and he travels the world tirelessly seeking his origins, his parentage, his people. As he roams, he gathers weight and size; the forces that weather lesser rocks, instead cause Tiny to grow and ever grow.
@@ -83,13 +84,26 @@
       </article>
     </section>
     <footer>write by linwalker @2017</footer>
-    <script type="text/javascript" src="html2canvas.js"></script>
+    <script type="text/javascript" src="./js/html2canvas.js"></script>
+    <script type="text/javascript" src="./js/jsPdf.debug.js"></script>
     <script type="text/javascript">
-        html2canvas(document.body, {
-          onrendered:function(canvas) {
-            document.body.appendChild(canvas)
-          }
-        })
+      var downPdf = document.getElementById("renderPdf");
+      downPdf.onclick = function() {
+          html2canvas(document.body, {
+              onrendered:function(canvas) {
+                  //a4[595.28,841.89]
+                  //返回图片URL，参数：图片格式和清晰度(0-1)
+                  var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                  var pdf = new jsPDF('', 'pt', 'a4');
+
+                  pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
+
+                  pdf.save('stone.pdf');
+
+              }
+          })
+      }
     </script>
   </body>
 </html>
