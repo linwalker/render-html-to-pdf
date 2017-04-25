@@ -83,7 +83,9 @@
     <script type="text/javascript" src="./js/html2canvas.js"></script>
     <script type="text/javascript" src="./js/jsPdf.debug.js"></script>
     <script type="text/javascript">
+
       var downPdf = document.getElementById("renderPdf");
+
       downPdf.onclick = function() {
           html2canvas(document.body, {
               onrendered:function(canvas) {
