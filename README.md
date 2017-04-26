@@ -1,4 +1,4 @@
-#html转成pdf,下载（html2canvas 和 jsPDF）
+# html转成pdf,下载（html2canvas 和 jsPDF）
 
 最近碰到个需求，需要把当前页面生成pdf，并下载。弄了几天，自己整理整理，记录下来，我觉得应该会有人需要 ：）
 
