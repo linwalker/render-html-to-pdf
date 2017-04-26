@@ -213,7 +213,7 @@ html2canvas(document.body, {
 还是看代码吧：
 
 ```javascript
-html2canvas(document.body, {
+    html2canvas(document.body, {
 	  onrendered:function(canvas) {
 	
 	      var contentWidth = canvas.width;
@@ -251,7 +251,7 @@ html2canvas(document.body, {
 	
 	      pdf.save('content.pdf');
 	  }
-})
+    })
 ```
 
 在线演示[demo7](https://linwalker.github.io/render-html-to-pdf/demo7.html)
