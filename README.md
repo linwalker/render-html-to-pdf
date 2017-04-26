@@ -33,7 +33,7 @@ html2canvas(element, {
 
 做个小例子代码如下，在线展示链接[demo1](https://linwalker.github.io/render-html-to-pdf/demo1.html)
 
-```html
+``` html
 <html>
   <head>
     <title>html2canvas example</title>
