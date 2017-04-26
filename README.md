@@ -198,7 +198,7 @@ html2canvas(document.body, {
 ：）可以看看下面这种方法
 
 
-####多页
+#### 多页
 
 我提供的思路是我们只生成一个canvas，对就一个，转化元素就是你要转成pdf内容的母元素，在这篇demo里就是`body`了；其他不变，也是超过一页内容就`addPage`，然后`addImage`,只不过这里添加的事同一个canvas。
 
