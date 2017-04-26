@@ -201,9 +201,59 @@ What? 想一想我们的canvas是肿么来的，不用拉上去，直接看下�
 
 我提供的思路是我们只生成一个canvas，对就一个，转化元素就是你要转成pdf内容的母元素，在这篇demo里就是`body`了；其他不变，也是超过一页内容就`addPage`，然后`addImage`,只不过这里添加的事同一个canvas。
 
-别急我没有耍你，看下面这张示意图，你是不是懂了
+当然这样做只会出现多页重复的pdf，那到底怎么实现正确分页显示。其实主要利用了jsPDF的两点：
 
+	- 超过jsPDF实例格式尺寸的内容不显示
+	（var pdf = new jsPDF('', 'pt', 'a4'); demo中就是a4纸的尺寸）
+	- addImage有两个参数可以控制图片在pdf中的位置
 
+虽然每一页pdf上显示的图片是相同的，但我们通过调整图片的位置，产生了分页的错觉。以第二页为例，将竖直方向上的偏移设置为`-841.89`即一张a4纸的高度，又因为超过a4纸高度范围的图片不显示，所以第二页显示了图片竖直方向上[841.89,1682.78]范围内的内容，这就得到了分页的效果。
+
+还是看代码吧：
+
+```
+html2canvas(document.body, {
+	  onrendered:function(canvas) {
+	
+	      var contentWidth = canvas.width;
+	      var contentHeight = canvas.height;
+	
+	      //一页pdf显示页面生成的canvas高度;
+	      var pageHeight = contentWidth / 592.28 * 841.89;
+	      //未生成pdf的页面高度
+	      var leftHeight = contentHeight;
+	      //页面偏移
+	      var position = 0;
+	      //a4纸的尺寸[595.28,841.89]，页面生成的canvas在pdf中图片的宽高
+	      var imgWidth = 595.28;
+	      var imgHeight = 592.28/contentWidth * contentHeight;
+	
+	      var pageData = canvas.toDataURL('image/jpeg', 1.0);
+	
+	      var pdf = new jsPDF('', 'pt', 'a4');
+	
+	      //有两个高度需要区分，一个是页面的实际高度，和生成pdf的页面高度(841.89)
+	      //当内容未超过pdf一页显示的范围，无需分页
+	      if (leftHeight < pageHeight) {
+	          pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+	      } else {
+	          while(leftHeight > 0) {
+	              pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+	              leftHeight -= pageHeight;
+	              position -= 841.89;
+	              //避免添加空白页
+	              if(leftHeight > 0) {
+	                  pdf.addPage();
+	              }
+	          }
+	      }
+	
+	      pdf.save('content.pdf');
+	  }
+})
+```
+
+在线演示[demo7](https://linwalker.github.io/render-html-to-pdf/demo7.html)
 
 
 
