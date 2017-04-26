@@ -13,7 +13,7 @@
 
 使用的API也很简洁，下面代码可以将某个元素渲染成canvas：
 
-```
+```javascript
 html2canvas(element, {
     onrendered: function(canvas) {
         // canvas is the final rendered <canvas> element
@@ -23,7 +23,7 @@ html2canvas(element, {
 
 通过onrendered方法，可以将生成的canvas进行回掉，比如插入到页面中：
 
-```
+```javascript
 html2canvas(element, {
     onrendered: function(canvas) {
        document.body.appendChild(canvas);
@@ -33,7 +33,7 @@ html2canvas(element, {
 
 做个小例子代码如下，在线展示链接[demo1](https://linwalker.github.io/render-html-to-pdf/demo1.html)
 
-```
+```html
 <html>
   <head>
     <title>html2canvas example</title>
@@ -82,7 +82,7 @@ jsPDF库可以用于浏览器端生成PDF。
 
 使用方法如下：
 
-```
+```javascript
 // 默认a4大小，竖直方向，mm单位的PDF
 var doc = new jsPDF();
 
@@ -97,7 +97,7 @@ doc.save('a4.pdf');
 
 使用方法如下：
 
-```
+```javascript
 // 三个参数，第一个方向，第二个尺寸，第三个尺寸格式
 var doc = new jsPDF('landscape','pt',[205, 115])
 
@@ -182,12 +182,12 @@ jsPDF提供了一个很有用的API，`addPage()`，我们可以通过`pdf.addPa
 
 What? 想一想我们的canvas是肿么来的，不用拉上去，直接看下面：
 
-```
-	html2canvas(document.body, {
-        onrendered:function(canvas) {
-         //it is here we handle the canvas
-        }
-	})
+```javascript
+html2canvas(document.body, {
+    onrendered:function(canvas) {
+     //it is here we handle the canvas
+    }
+})
 ```
 
 这里的`body`就是要生成canvas的元素对象，一个元素生成一个canvas；那么我们需要一页一页的canvas，也就是说。。。
@@ -211,7 +211,7 @@ What? 想一想我们的canvas是肿么来的，不用拉上去，直接看下�
 
 还是看代码吧：
 
-```
+```javascript
 html2canvas(document.body, {
 	  onrendered:function(canvas) {
 	
