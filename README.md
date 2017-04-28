@@ -261,3 +261,11 @@ html2canvas(document.body, {
 ```
 
 在线演示[demo7](https://linwalker.github.io/render-html-to-pdf/demo7.html)
+
+最后附上几个jsPDF的官方网址:
+
+<http://rawgit.com/MrRio/jsPDF/master/>
+
+<http://rawgit.com/MrRio/jsPDF/master/docs/index.html>
+
+<http://mrrio.github.io/>
