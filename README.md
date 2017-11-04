@@ -262,8 +262,18 @@ html2canvas(document.body, {
 
 在线演示[demo7](https://linwalker.github.io/render-html-to-pdf/demo7.html)
 
-#### 
+#### 两边留边距
+修改imgWidth，并且在addImage时x方向参数设置你要的边距，具体代码如下
+```javascript
+var imgWidth = 555.28;
+var imgHeight = 555.28/contentWidth * contentHeight;
+...
+pdf.addImage(pageData, 'JPEG', 20, 0, imgWidth, imgHeight );
+...
+pdf.addImage(pageData, 'JPEG', 20, position, imgWidth, imgHeight);
+```
 在线演示[demo8](https://linwalker.github.io/render-html-to-pdf/demo8.html)
+
 最后附上几个jsPDF的官方网址:
 
 <http://rawgit.com/MrRio/jsPDF/master/>
