@@ -274,6 +274,53 @@ pdf.addImage(pageData, 'JPEG', 20, position, imgWidth, imgHeight);
 ```
 在线演示[demo8](https://linwalker.github.io/render-html-to-pdf/demo8.html)
 
+#### 图片跨域问题
+当页面中引用了OSS等其他非本域的图片的时候，导出图片会有跨域访问的问题，导致导出失败，解决方法如下：
+1. 首先要开启OSS等的跨域访问，要确定被请求的图片所在域支持CORS跨域访问
+2. 将图片转化为Data URI，替换图片的 src，这样就可以导出非本域的图片，代码如下：
+``` html
+<img id="corsPicture" name="corsPicture" crossOrigin="Anonymous" src="http://cors-picture-url" />
+```
+
+``` javascript
+var corsPicture = document.getElementById("corsPicture");
+var corsPictureCanvas = document.createElement("canvas");
+corsPictureContext = corsPictureCanvas.getContext("2d");
+
+corsPictureCanvas.width = corsPicture.width;
+corsPictureCanvas.height = corsPicture.height;
+
+// 在canvas中绘制图片
+corsPictureContext.drawImage(corsPicture, 0, 0, corsPictureCanvas.width, corsPictureCanvas.height);
+       
+// 将图片保存为Data URI
+var corsPictureDataURI = corsPictureCanvas.toDataURL("image/png");
+       
+// 重新替换图片src为本地DataURI
+corsPicture.setAttribute("src", corsPictureDataURI);
+
+```
+      
+#### 图片DataURI不清晰
+
+在上面通过将图片转为DataURI后又会面临一个新的问题：替换后的图片清晰度不如之前，可以设置好图片的高度和宽度，然后将图片的Canvas放大后再转为DataURI，这样就可以解决图片不清晰的问题
+``` html
+<img id="corsPicture" name="corsPicture" style="height:100px; width:100px;" crossOrigin="Anonymous" src="http://cors-picture-url" />
+```
+
+``` javascript
+  	
+// 同上...
+	
+// 将图片放大十倍再转换，避免替换时因为尺寸相同导致不清晰问题
+var ratio = 10;
+corsPictureCanvas.width = corsPicture.width * ratio;
+corsPictureCanvas.height = corsPicture.height * ratio;
+
+// 同上...
+
+```
+
 最后附上几个jsPDF的官方网址:
 
 <http://rawgit.com/MrRio/jsPDF/master/>
